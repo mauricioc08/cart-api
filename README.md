@@ -4,6 +4,8 @@ API REST desenvolvida em **Node.js + Express** com **SQLite** para gerenciar pro
 Inclui autenticação via JWT, controle de concorrência no checkout, permissões de administrador e testes automatizados.
 
 ---
+## Requisitos
+- **Node.js v18** (ou superior)
 
 ## 🚀 Funcionalidades
 
