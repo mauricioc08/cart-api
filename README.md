@@ -82,9 +82,9 @@ http://localhost:4000
       x-admin-secret: SEU_ADMIN_SECRET
       ```
    4. **create-cart** → Criar um carrinho para o usuário.
-   5. **add-product-cart** → Adicionar produto ao carrinho.
-   6. **remove-product-cart** → Remover produto do carrinho (opcional).
-   7. **get-products** → Listar todos os produtos e estoques atuais.
+   5. **get-products** → Listar todos os produtos e estoques atuais.
+   6. **add-product-cart** → Adicionar produto ao carrinho.
+   7. **remove-product-cart** → Remover produto do carrinho (opcional).
    8. **checkout** → Finalizar compra e atualizar estoque.
 
 
