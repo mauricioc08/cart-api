@@ -1,13 +1,13 @@
 # 🛒 API Carrinho com Estoque Reativo
 
 API REST desenvolvida em **Node.js + Express** com **SQLite** para gerenciar produtos, carrinhos e estoque em tempo real.  
-Inclui autenticação via JWT, controle de concorrência no checkout e testes automatizados.
+Inclui autenticação via JWT, controle de concorrência no checkout, permissões de administrador e testes automatizados.
 
 ---
 
 ## 🚀 Funcionalidades
 
-- Criar produtos com estoque inicial
+- Criar produtos com estoque inicial (**apenas ADMIN**)
 - Criar carrinhos de compra
 - Adicionar/remover produtos ao carrinho
 - Finalizar compra decrementando estoque
@@ -21,7 +21,7 @@ Inclui autenticação via JWT, controle de concorrência no checkout e testes au
 ## ⚙️ Configuração do Projeto
 
 
-### 1️⃣ Clonar o repositório
+1️⃣ Clonar o repositório
 ```bash
 git clone https://github.com/seu-usuario/cart-api.git
 cd cart-api
@@ -32,10 +32,15 @@ npm install
 ```
 3️⃣ Configurar variáveis de ambiente
 
-Crie um arquivo .env na raiz com:
+Use o arquivo env.sample como base:
 ```bash
-JWT_SECRET=seu_token_secreto
+cp env.sample .env
+```
+Edite o .env com suas chaves:
+```bash
 PORT=4000
+JWT_SECRET=secret_key
+ADMIN_SECRET=YWRtaW5pc3RyYWRvcg
 ```
 4️⃣ Rodar em modo desenvolvimento
 ```bash
@@ -47,45 +52,39 @@ http://localhost:4000
 ```
 ---
 
-### 🛠 Testando Manualmente com Postman
+## 🛠 Testando Manualmente com Postman
 
-Incluímos no repositório o arquivo:
-```bash
-postman_collection.json
-```
+Incluímos no repositório o arquivo de collection do Postman:  
+[📥 **Baixar Collection do Postman**](./reactive-cart-api.postman_collection.json)
+
 Ele contém todas as requisições necessárias para testar a API.
 
 ### Passos:
 
-1 - Abra o Postman.
+1. Baixe o arquivo acima ou localize-o na raiz do projeto.
+2. Abra o **Postman**.
+3. Vá em **File → Import**.
+4. Selecione o arquivo `reactive-cart-api.postman_collection.json`.
+5. Configure a variável de ambiente `base_url` para:
 
-2 - Vá em File → Import.
-
-3 - Selecione o arquivo postman_collection.json.
-
-4 - Configure a variável de ambiente base_url para:
 ```bash
 http://localhost:4000
 ```
-### 5 Siga esta ordem de execução:
+5️⃣ Execute as requisições nesta ordem:
+   1. **register** → Criar um novo usuário.
+   2. **login** → Obter o token JWT.
+   3. **ADMIN create-product** → Criar produto no estoque.  
+      - No header envie:
+      ```
+      Authorization: Bearer SEU_TOKEN
+      x-admin-secret: SEU_ADMIN_SECRET
+      ```
+   4. **create-cart** → Criar um carrinho para o usuário.
+   5. **add-product-cart** → Adicionar produto ao carrinho.
+   6. **remove-product-cart** → Remover produto do carrinho (opcional).
+   7. **get-products** → Listar todos os produtos e estoques atuais.
+   8. **checkout** → Finalizar compra e atualizar estoque.
 
-        Auth → Register: Criar usuário.
-
-        Auth → Login: Obter token JWT.
-
-        Products → Create Product: Criar produto com estoque inicial.
-
-        Cart → Create Cart: Criar carrinho vinculado ao usuário.
-
-        Cart → Add Item: Adicionar produto ao carrinho.
-
-        Cart → Checkout: Finalizar compra e atualizar estoque.
-
-📌 Importante:
-
-    Sempre envie o token JWT no header:
-
-    Authorization: Bearer SEU_TOKEN
 
 
 ### ✅ Rodando Testes Automatizados
@@ -100,15 +99,15 @@ npm test -- tests/concurrency.test.js
 ```
 ### 🔄 Fluxo de Funcionamento
 
-1 - Usuário se registra ou faz login (gera JWT).
+1. Usuário se registra ou faz login (gera JWT).
 
-2 - Admin cria produtos com estoque inicial.
+2. Admin cria produtos com estoque inicial usando ADMIN_SECRET.
 
-3 - Usuário cria seu carrinho.
+3. Usuário cria seu carrinho.
 
-4 - Adiciona produtos ao carrinho.
+4. Adiciona produtos ao carrinho.
 
-Faz checkout:
+5. Faz checkout:
 
     Aplica lock para evitar concorrência.
 
@@ -117,6 +116,7 @@ Faz checkout:
     Atualiza estoque.
 
     Finaliza pedido.
+
 
 
 ### 🔐 Controle de Concorrência
@@ -129,6 +129,7 @@ Se um segundo checkout for iniciado antes do primeiro terminar:
 
     Apenas o primeiro é processado.
 
+---
 
 ### 📜 Licença
 
