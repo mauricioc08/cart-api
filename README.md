@@ -36,7 +36,7 @@ npm install
 
 Use o arquivo env.sample como base:
 ```bash
-cp env.sample .env
+cp .env.sample .env
 ```
 Edite o .env com suas chaves:
 ```bash
