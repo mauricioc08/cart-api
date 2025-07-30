@@ -25,7 +25,7 @@ Inclui autenticação via JWT, controle de concorrência no checkout, permissõe
 
 1️⃣ Clonar o repositório
 ```bash
-git clone https://github.com/seu-usuario/cart-api.git
+git clone https://github.com/mauricioc08/cart-api.git
 cd cart-api
 ```
 2️⃣ Instalar dependências
