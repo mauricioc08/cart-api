@@ -23,6 +23,7 @@ describe('Controle de concorrência no checkout', () => {
     const product = await request(app)
       .post('/products')
       .set('Authorization', `Bearer ${token}`)
+      .set('adminsecret', process.env.ADMIN_SECRET)
       .send({
         name: 'Produto Concorrencia',
         stock: 5

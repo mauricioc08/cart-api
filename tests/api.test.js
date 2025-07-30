@@ -19,8 +19,8 @@ beforeAll((done) => {
 describe('API de Carrinho com Estoque Reativo', () => {
   it('Deve registrar um novo usuário', async () => {
     const res = await request(app).post('/auth/register').send({
-      name: 'Teste API',
-      email: 'taller@teste.com',
+      name: 'Admin',
+      email: 'admin@admin.com',
       password: '12345678'
     });
     expect(res.statusCode).toBe(201);
@@ -28,7 +28,7 @@ describe('API de Carrinho com Estoque Reativo', () => {
 
   it('Deve fazer login e retornar token', async () => {
     const res = await request(app).post('/auth/login').send({
-      email: 'taller@teste.com',
+      email: 'admin@admin.com',
       password: '12345678'
     });
     expect(res.statusCode).toBe(200);
@@ -40,6 +40,7 @@ describe('API de Carrinho com Estoque Reativo', () => {
     const res = await request(app)
       .post('/products')
       .set('Authorization', `Bearer ${token}`)
+      .set('adminsecret', process.env.ADMIN_SECRET)
       .send({
         name: 'Camisa Azul',
         stock: 10
