@@ -124,6 +124,20 @@
 		},
 		{
 			"name": "create-cart",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"let cartId = jsonData?.id;",
+							"pm.collectionVariables.set('idCart', cartId);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -147,76 +161,6 @@
 					"port": "4000",
 					"path": [
 						"cart"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "add-product-cart",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{customerToken}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"cart_id\": 35,\n  \"product_id\": 37,\n  \"quantity\": 25\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:4000/cart/add",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"cart",
-						"add"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "remove-product-cart",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{customerToken}}",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n  \"cart_id\": 1,\n  \"product_id\": 3\n}\n",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:4000/cart/remove",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4000",
-					"path": [
-						"cart",
-						"remove"
 					]
 				}
 			},
@@ -258,6 +202,76 @@
 			"response": []
 		},
 		{
+			"name": "add-product-cart",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{customerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"cart_id\": {{idCart}},\n  \"product_id\": 37,\n  \"quantity\": 25\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/cart/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"cart",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove-product-cart",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{customerToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"cart_id\": {{idCart}},\n  \"product_id\": 3\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/cart/remove",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"cart",
+						"remove"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "checkout",
 			"request": {
 				"method": "POST",
@@ -270,7 +284,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"cart_id\": 35\n}\n",
+					"raw": "{\n  \"cart_id\": {{idCart}}\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -324,6 +338,11 @@
 		{
 			"key": "adminSecret",
 			"value": "YWRtaW5pc3RyYWRvcg",
+			"type": "string"
+		},
+		{
+			"key": "idCart",
+			"value": "",
 			"type": "string"
 		}
 	]
