@@ -6,6 +6,7 @@ Inclui autenticação via JWT, controle de concorrência no checkout, permissõe
 ---
 ## Requisitos
 - **Node.js v18** (ou superior)
+- **Postman**
 
 ## 🚀 Funcionalidades
 
@@ -84,8 +85,9 @@ http://localhost:4000
    4. **create-cart** → Criar um carrinho para o usuário.
    5. **get-products** → Listar todos os produtos e estoques atuais.
    6. **add-product-cart** → Adicionar produto ao carrinho.
-   7. **remove-product-cart** → Remover produto do carrinho (opcional).
-   8. **checkout** → Finalizar compra e atualizar estoque.
+   7. **get-products-cart** → Lista produtos do carrinho.
+   8. **remove-product-cart** → Remover produto do carrinho (opcional).
+   9. **checkout** → Finalizar compra e atualizar estoque.
 
 
 
@@ -98,6 +100,9 @@ npm test
 Rodar teste específico:
 ```bash
 npm test -- tests/concurrency.test.js
+```
+```bash
+npm test -- tests/api.test.js
 ```
 ### 🔄 Fluxo de Funcionamento
 
@@ -135,5 +140,5 @@ Se um segundo checkout for iniciado antes do primeiro terminar:
 
 ### 📜 Licença
 
-Este projeto é de uso livre para fins de estudo.
+Este projeto é de uso livre para fins de estudo ou teste técnico.
 
