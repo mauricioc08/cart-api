@@ -68,7 +68,7 @@ Ele contém todas as requisições necessárias para testar a API.
 2. Abra o **Postman**.
 3. Vá em **File → Import**.
 4. Selecione o arquivo `reactive-cart-api.postman_collection.json`.
-5. Configure a variável de ambiente `base_url` para:
+
 
 ```bash
 http://localhost:4000
