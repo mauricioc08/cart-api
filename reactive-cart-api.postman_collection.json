@@ -101,7 +101,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"name\": \"Camisa Vermelha\",\n  \"stock\": 10\n}\n",
+					"raw": "{\n  \"name\": \"Camisa azul\",\n  \"stock\": 10\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -214,7 +214,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"cart_id\": {{idCart}},\n  \"product_id\": 37,\n  \"quantity\": 25\n}\n",
+					"raw": "{\n  \"cart_id\": {{idCart}},\n  \"product_id\": 1,\n  \"quantity\": 2\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -237,6 +237,36 @@
 			"response": []
 		},
 		{
+			"name": "get-products-cart",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{customerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/cart/items",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"cart",
+						"items"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "remove-product-cart",
 			"request": {
 				"method": "POST",
@@ -249,7 +279,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"cart_id\": {{idCart}},\n  \"product_id\": 3\n}\n",
+					"raw": "{\n  \"cart_id\": {{idCart}},\n  \"product_id\": 1\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
