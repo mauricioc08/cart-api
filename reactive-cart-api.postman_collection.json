@@ -130,7 +130,7 @@
 					"script": {
 						"exec": [
 							"var jsonData = pm.response.json();",
-							"let cartId = jsonData?.id;",
+							"let cartId = jsonData?.id ?? jsonData?.cart_id;",
 							"pm.collectionVariables.set('idCart', cartId);"
 						],
 						"type": "text/javascript",
